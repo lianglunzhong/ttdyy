@@ -8,6 +8,8 @@ class Role extends Model
 {
     protected $table = 'roles';
 
+    protected $fillable = ['name', 'slug'];
+
     public function admins()
     {
     	return $this->hasMany('App\Model\Admin');
