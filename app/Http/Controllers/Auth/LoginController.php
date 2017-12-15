@@ -36,4 +36,13 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * 重构登录字段
+     * @return [type] [description]
+     */
+    public function username()
+    {
+        return 'mobile';
+    }
 }
