@@ -19,6 +19,7 @@ class CreateAdminsTable extends Migration
             $table->string('email')->unique()->comment('邮箱');
             $table->integer('role_id')->unsigned()->comment('角色id');
             $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
             $table->foreign('role_id')->references('id')->on('roles');
         });
