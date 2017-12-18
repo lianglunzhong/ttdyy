@@ -13,14 +13,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/css/ttdyy.login.css') }}" rel="stylesheet">
+    <link href="{{ asset('ttdyy-admin/css/ttdyy.login.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container-fluid">
     <div class="row">
         <div class="col-md-4 col-md-offset-4 login-panel">
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+                <div class="panel-heading login-heading">Login</div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('admin.login') }}">
@@ -74,5 +74,43 @@
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('ttdyy-admin/js/anime.min.js') }}"></script>
+    <script>
+    var maxElements = 400;
+    var duration = 10000;
+    var toAnimate = [];
+    var w = window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
+    var colors = ['#FF324A', '#31FFA6', '#206EFF', '#FFFF99'];
+
+    var createElements = (function() {
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < maxElements; i++) {
+      var el = document.createElement('div');
+      el.className = 'anime';
+      el.style.background = colors[anime.random(0, 3)];
+      el.style.transform = 'rotate('+anime.random(-360, 360)+'deg)';
+      toAnimate.push(el);
+      fragment.appendChild(el);
+    }
+    document.body.appendChild(fragment);
+    })();
+
+    var animate = function(el) {
+    anime({
+      targets: el,
+      rotate: anime.getValue(el,'rotate'),
+      translateX: [0, w/2],
+      translateY: [0, w/2],
+      scale: [0, 0.5],
+      delay: anime.random(0, duration),
+      duration: duration,
+      easing: "easeInCubic",
+      loop: true
+    });
+    }
+
+    toAnimate.forEach(animate);
+</script>
+
 </body>
 </html>

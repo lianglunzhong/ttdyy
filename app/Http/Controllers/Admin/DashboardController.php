@@ -11,7 +11,7 @@ class DashboardController extends AdminController
     
     public function index(Request $request)
     {
-    	// return view('admin.dashboard.index')
-    	dd('dashboard,当前用户名：' . auth('admin')->user()->name);
+    	return view('admin.dashboard.index');
+    	// dd('dashboard,当前用户名：' . auth('admin')->user()->name);
     }
 }
