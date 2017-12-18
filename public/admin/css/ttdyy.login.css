@@ -1,0 +1,34 @@
+/** login */
+.login-panel {
+	position: absolute;
+	top: 20%;
+}
+.form-group {
+	margin-top: 15px;
+	margin-bottom: 25px;
+}
+input.form-control {
+	padding-left: 30px;
+}
+.login-input-icon {
+	position: absolute;
+    left: 15px;
+    z-index: 9999;
+    display: block;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    pointer-events: none;
+    color: #00aeff;
+    font-size: 16px;
+}
+.has-error .login-input-icon {
+	color: #fe514a;
+}
+.has-error .form-control {
+	border-color: #fe514a;
+}
+.has-error .help-block {
+	color: #fe514a;
+}
