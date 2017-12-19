@@ -181,7 +181,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="{{ asset('ttdyy-admin/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">{{ auth('admin')->user()->name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -189,8 +189,8 @@ desired effect
                 <img src="{{ asset('ttdyy-admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  {{ auth('admin')->user()->role->name }}
+                  <small>{{ auth('admin')->user()->created_at }}</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -214,7 +214,7 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="/admin/logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -239,7 +239,7 @@ desired effect
           <img src="{{ asset('ttdyy-admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>{{ auth('admin')->user()->name }}</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -259,9 +259,28 @@ desired effect
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
+        <li class="header">MENU</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+        <li class="{{ url()->current() == config('app.url').'/admin' ? 'active' : '' }}">
+          <a href="{{ route('admin.dashboard') }}">
+            <i class="fa fa-dashboard"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="treeview {{ stripos(url()->current(), '/admin/auth') ? 'menu-open' : '' }}">
+          <a href="#"><i class="fa fa-user"></i> <span>Auth</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu {{ stripos(url()->current(), '/admin/auth') ? 'show' : '' }}">
+            <li class="{{ stripos(url()->current(), '/auth/admin') ? 'active' : '' }}">
+              <a href="{{ route('admin.list') }}"><i class="fa fa-users"></i>admins</a>
+            </li>
+            <li><a href="#"><i class="fa fa-group"></i>roles</a></li>
+            <li><a href="#"><i class="fa fa-group"></i>users</a></li>
+          </ul>
+        </li>
         <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
@@ -285,8 +304,8 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
-        <small>Optional description</small>
+        {{ $page_header }}
+        <small>{{ $page_header_desc }}</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>

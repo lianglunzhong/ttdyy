@@ -153,8 +153,8 @@
       <replace>colSm</replace>
       <replace>Start</replace>
       <replace>start</replace>
-      <replace>@import (reference) &quot;../../../bower_components/bootstrap/less/mixins&quot;;</replace>
-      <replace>&quot;../../../bower_components/bootstrap/less/</replace>
+      <replace>@import (reference) &quot;../../../bootstrap/less/mixins&quot;;</replace>
+      <replace>&quot;../../../bootstrap/less/</replace>
       <replace>bower_component/bootstrap/dist/css/bootstrap.min.css</replace>
       <replace>bower_components/bootstrap/dist/css/bootstrap.min.css</replace>
       <replace>bower_components/font-awesome/css/font-awesome.min.css</replace>

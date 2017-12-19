@@ -7,5 +7,11 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
     // $router->post('logout', 'LoginController@logout')->name('admin.logout');
     $router->get('logout', 'LoginController@logout');
 
-    $router->get('/', 'DashboardController@index');
+    //dashboard
+    $router->get('/', 'DashboardController@index')->name('admin.dashboard');
+
+    //admins
+    $router->get('/auth/admin/list', 'AdminController@adminsList')->name('admin.list');
+    $router->get('/auth/role/list', 'AdminController@rolesList')->name('role.list');
+
 });

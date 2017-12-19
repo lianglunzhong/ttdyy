@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\CommonController;
 
-class AdminController extends Controller
+class AdminController extends CommonController
 {
-    public function __construct()
+    public function adminsList(Request $request)
     {
-    	$this->middleware('auth.admin:admin');
+    	return view('admin.admins.list')
+    			->with('page_header', 'Admins')
+    			->with('page_header_desc', 'list');
     }
 }

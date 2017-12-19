@@ -8,6 +8,8 @@
 <div>
 	this is dashboard!
 </div>
+<div>{{ url()->current() }}</div>
+<div>{{ config('app.url') }}</div>
 @endsection
 
 
