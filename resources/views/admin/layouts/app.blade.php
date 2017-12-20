@@ -21,6 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="{{ asset('ttdyy-admin/dist/css/skins/skin-blue.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('ttdyy-admin/datatables/css/jquery.dataTables.css') }}">
   <link rel="stylesheet" href="{{ asset('ttdyy-admin/css/ttdyy.common.css') }}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -425,6 +426,7 @@ desired effect
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('ttdyy-admin/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('ttdyy-admin/datatables/js/jquery.dataTables.js') }}"></script>
 <!-- <script src="{{ asset('ttdyy-admin/js/jquery.wresize.js') }}"></script> -->
 <script src="{{ asset('ttdyy-admin/js/ttdyy.common.js') }}"></script>
 
