@@ -9,10 +9,10 @@
     <div class="col-md-12">
         <div class="content-box">
             <div class="content-box-header">
-                <div class="row no-margin">
+                <!-- <div class="row no-margin">
                     <div class="col-sm-6 col-md-4 col-lg-3">
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control" placeholder="serach for name or email">
+                            <input type="text" name="search" class="form-control" placeholder="serach...">
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" type="button">
                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -32,10 +32,10 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="content-box-body">
-                <table id="table_id_example" class="table table-bordered table-hover table-responsive">
+                <table id="table" class="table table-bordered table-hover table-responsive">
                     <thead>
                         <tr class="info">
                             <th class="select-all">Select all</th>
@@ -44,41 +44,21 @@
                             <th>Email</th>
                             <th>Role</th>
                             <th>Create at</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($admins as $admin)
                         <tr>
-                            <td scope="row"><input type="checkbox" name=""></td>
-                            <td>1</td>
-                            <td>KeKeO</td>
-                            <td>admin@ttdyy.com</td>
-                            <td>Admin</td>
-                            <td>2017-12-20</td>
+                            <td class="select-all"><input type="checkbox" name=""></td>
+                            <td>{{ $admin->id }}</td>
+                            <td>{{ $admin->name }}</td>
+                            <td>{{ $admin->email }}</td>
+                            <td>{{ $admin->role->name }}</td>
+                            <td>{{ $admin->created_at }}</td>
+                            <td>action</td>
                         </tr>
-                        <tr>
-                            <td scope="row"><input type="checkbox" name=""></td>
-                            <td>2</td>
-                            <td>Xuqing</td>
-                            <td>admin@ttdyy.com</td>
-                            <td>Admin</td>
-                            <td>2017-12-22</td>
-                        </tr>
-                        <tr>
-                            <td scope="row"><input type="checkbox" name=""></td>
-                            <td>3</td>
-                            <td>Lala</td>
-                            <td>admin@ttdyy.com</td>
-                            <td>Common</td>
-                            <td>2017-12-01</td>
-                        </tr>
-                        <tr>
-                            <td scope="row"><input type="checkbox" name=""></td>
-                            <td>4</td>
-                            <td>LLz</td>
-                            <td>admin@ttdyy.com</td>
-                            <td>Admin</td>
-                            <td>2017-12-10</td>
-                        </tr>
+                        @endforeach
                     </tbody>
                     </table>
             </div>
@@ -92,9 +72,30 @@
 @section('script')
 <script type="text/javascript">
     $(function() {
-        $('#table_id_example').DataTable({
-            "dom": '<"content-box-header"f><"content-box-body"t><"content-box-footer"ilp>'
+        $('#table').DataTable({
+            "dom": '<"table-header"f><"table-body"t><"table-footer"lip>', //自定义dom的位置
+            "bStateSave": true, //状态保存，使用了翻页或者改变了每页显示数据数量，会保存在cookie中，下回访问时会显示上一次关闭页面时的内容
+            "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]], //定义每页显示数据数量
+            "aoColumns": [
+                { "asSorting": [ ] },
+                { "asSorting": [ "desc", "asc"] },
+                null,
+                null,
+                null,
+                null,
+                { "asSorting": [ ] }
+            ],   //排序控制
+            'iDisplayLength': 50,
+
+        });
+
+        $('input[name=search]').keyup(function(event) {
+        	var search = $('input[name=search]').val();
+        	console.log(search);
+        	$('.dataTables_filter input').val(search);
         });
     });
+
+
 </script>
 @endsection

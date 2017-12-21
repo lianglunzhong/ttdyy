@@ -13,5 +13,6 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
     //admins
     $router->get('/auth/admin/list', 'AdminController@adminsList')->name('admin.list');
     $router->get('/auth/role/list', 'AdminController@rolesList')->name('role.list');
+    $router->get('/add/admin', 'AdminController@addAdminsData');
 
 });

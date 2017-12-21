@@ -4189,18 +4189,22 @@
 		var language = settings.oLanguage;
 		var previousSearch = settings.oPreviousSearch;
 		var features = settings.aanFeatures;
-		var input = '<input type="search" class="'+classes.sFilterInput+'"/>';
+		var input = '<input type="search" class="form-control table-search"/><span class="glyphicon glyphicon-search table-search-icon" aria-hidden="true"></span>';
+
+		var new_and_export_btn  = '<div class="pull-right"><button class="btn btn-success btn-new"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>New</button><button class="btn btn-info"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>Export</button></div>'
 	
-		var str = language.sSearch;
+		// var str = language.sSearch;
+		var str = '';
 		str = str.match(/_INPUT_/) ?
 			str.replace('_INPUT_', input) :
-			str+input;
+			str+input+new_and_export_btn;
 	
 		var filter = $('<div/>', {
 				'id': ! features.f ? tableId+'_filter' : null,
 				'class': classes.sFilter
 			} )
-			.append( $('<label/>' ).append( str ) );
+			// .append( $('<label/>' ).append( str ) );
+			.append( $('<div class="table-filter"/>' ).append( str ) );
 	
 		var searchFn = function() {
 			/* Update all other filter input elements for the new display */
