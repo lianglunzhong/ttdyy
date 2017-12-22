@@ -8,16 +8,21 @@
     min-height: 100%;
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     margin:0 auto;
+    padding-bottom: 10px;
 }
-.table-filter {
+.table-header {
     padding:10px;
     padding-bottom: 5px;
+}
+.table-footer {
+    padding:10px;
 }
 .table-search {
     width: 25%;
     min-width: 200px;
     display: inline-block;
     padding-left: 30px;
+    border-radius: 5px;
 }
 .table-search-icon {
     position: absolute;
@@ -39,4 +44,56 @@
 th.select-all, td.select-all {
     width: 60px;
 }
+th.action, td.action {
+    width: 60px;
+    text-align: center;
+}
+
+.dataTables_length {
+    /*width: 108px;*/
+    margin-right: 15px;
+}
+.dataTables_filter {
+    /*margin-left: 128px;*/
+}
+.table-length {
+    display: inline;
+    width: 70px;
+    border-radius: 5px;
+    padding: 4px 10px;
+    height: 31px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border:solid 1px #ddd;
+    /*padding:6px 12px;*/
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    margin-left: -1px;
+    color: #337ab7;
+    font-size: 14px;
+    text-decoration: none;
+    background-color: #fff;
+    border-radius: none;
+}
+.paginate_button.previous {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.paginate_button.next {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.table-edit-icon {
+    cursor: pointer;
+    color: #3c8dbc;
+}
+.table-trash-icon {
+    cursor: pointer;
+    margin-left: 10px;
+    color: #c12e2a;
+}
+
 

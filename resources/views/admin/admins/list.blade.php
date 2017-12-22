@@ -44,7 +44,7 @@
                             <th>Email</th>
                             <th>Role</th>
                             <th>Create at</th>
-                            <th>Action</th>
+                            <th class="action">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,7 +56,10 @@
                             <td>{{ $admin->email }}</td>
                             <td>{{ $admin->role->name }}</td>
                             <td>{{ $admin->created_at }}</td>
-                            <td>action</td>
+                            <td class="action">
+                                <span class="glyphicon glyphicon-edit table-edit-icon" aria-hidden="treu"></span>
+                                <span class="glyphicon glyphicon-trash table-trash-icon" aria-hidden="treu"></span>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -73,7 +76,7 @@
 <script type="text/javascript">
     $(function() {
         $('#table').DataTable({
-            "dom": '<"table-header"f><"table-body"t><"table-footer"lip>', //自定义dom的位置
+            "dom": '<"table-header"f><"table-body"t><"table-footer"ipl>', //自定义dom的位置
             "bStateSave": true, //状态保存，使用了翻页或者改变了每页显示数据数量，会保存在cookie中，下回访问时会显示上一次关闭页面时的内容
             "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]], //定义每页显示数据数量
             "aoColumns": [
@@ -85,8 +88,17 @@
                 null,
                 { "asSorting": [ ] }
             ],   //排序控制
-            'iDisplayLength': 50,
-
+            "iDisplayLength": 50,
+            "oLanguage": {
+                "oPaginate": {
+                    "sPrevious": '<span aria-hidden="true">«</span>',
+                    "sNext": '<span aria-hidden="true">»</span>',
+                },
+                // "sLengthMenu": "Show _MENU_ ",
+            },
+            "oClasses": {
+                "sLengthSelect": "form-control table-length"
+            }
         });
 
         $('input[name=search]').keyup(function(event) {

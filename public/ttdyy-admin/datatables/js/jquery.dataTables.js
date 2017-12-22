@@ -4204,7 +4204,7 @@
 				'class': classes.sFilter
 			} )
 			// .append( $('<label/>' ).append( str ) );
-			.append( $('<div class="table-filter"/>' ).append( str ) );
+			.append(str);
 	
 		var searchFn = function() {
 			/* Update all other filter input elements for the new display */
@@ -4820,6 +4820,7 @@
 	 */
 	function _fnFeatureHtmlLength ( settings )
 	{
+		console.log(settings)
 		var
 			classes  = settings.oClasses,
 			tableId  = settings.sTableId,
@@ -4838,7 +4839,7 @@
 			select[0][ i ] = new Option( language[i], lengths[i] );
 		}
 	
-		var div = $('<div><label/></div>').addClass( classes.sLength );
+		var div = $('<div><sapn/></div>').addClass( classes.sLength );
 		if ( ! settings.aanFeatures.l ) {
 			div[0].id = tableId+'_length';
 		}
