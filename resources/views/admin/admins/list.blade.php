@@ -8,8 +8,8 @@
 <div class="row">
     <div class="col-md-12">
         <div class="content-box">
-            <div class="content-box-header">
-                <!-- <div class="row no-margin">
+            <!-- <div class="content-box-header">
+                <div class="row no-margin">
                     <div class="col-sm-6 col-md-4 col-lg-3">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" placeholder="serach...">
@@ -32,8 +32,8 @@
                             </button>
                         </div>
                     </div>
-                </div> -->
-            </div>
+                </div>
+            </div> -->
             <div class="content-box-body">
                 <table id="table" class="table table-bordered table-hover table-responsive">
                     <thead>

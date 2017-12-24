@@ -279,7 +279,9 @@ desired effect
             <li class="{{ stripos(url()->current(), '/auth/admin') ? 'active' : '' }}">
               <a href="{{ route('admin.list') }}"><i class="fa fa-users"></i>admins</a>
             </li>
-            <li><a href="#"><i class="fa fa-group"></i>roles</a></li>
+            <li class="{{ stripos(url()->current(), '/auth/role') ? 'active' : '' }}">
+              <a href="{{ route('role.list') }}"><i class="fa fa-group"></i>roles</a>
+            </li>
             <li><a href="#"><i class="fa fa-group"></i>users</a></li>
           </ul>
         </li>
