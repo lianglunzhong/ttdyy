@@ -285,6 +285,21 @@ desired effect
             <li><a href="#"><i class="fa fa-group"></i>users</a></li>
           </ul>
         </li>
+        <li class="treeview {{ stripos(url()->current(), '/admin/movie') ? 'menu-open' : '' }}">
+          <a href="#"><i class="fa fa-file-movie-o"></i> <span>Movie</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu {{ stripos(url()->current(), '/admin/movie') ? 'show' : '' }}">
+            <li class="{{ stripos(url()->current(), '/movie/movies') ? 'active' : '' }}">
+              <a href="{{ route('admin.list') }}"><i class="fa fa-file-movie-o"></i>movies</a>
+            </li>
+            <li class="{{ stripos(url()->current(), '/auth/category') ? 'active' : '' }}">
+              <a href="{{ route('category.list') }}"><i class="fa fa-reorder"></i>category</a>
+            </li>
+          </ul>
+        </li>
         <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>

@@ -15,4 +15,9 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
     $router->get('/auth/role/list', 'RoleController@rolesList')->name('role.list');
     $router->get('/add/admin', 'AdminController@addAdminsData');
 
+    //movie category
+    $router->get('/movie/category/list', 'CategoryController@categoryList')->name('category.list');
+    $router->get('/movie/category/add', 'CategoryController@showAddForm')->name('category.add');
+    $router->post('/movie/category/add', 'CategoryController@Add');
+
 });
