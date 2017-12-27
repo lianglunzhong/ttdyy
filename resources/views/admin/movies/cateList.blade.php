@@ -41,21 +41,17 @@
                             <th class="select-all">Select all</th>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
                             <th>Create at</th>
                             <th class="action">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($admins as $admin)
+                        @foreach ($categorys as $category)
                         <tr>
                             <td class="select-all"><input type="checkbox" name=""></td>
-                            <td>{{ $admin->id }}</td>
-                            <td>{{ $admin->name }}</td>
-                            <td>{{ $admin->email }}</td>
-                            <td>{{ $admin->role->name }}</td>
-                            <td>{{ $admin->created_at }}</td>
+                            <td>{{ $category->id }}</td>
+                            <td>{{ $category->name }}</td>
+                            <td>{{ $category->created_at }}</td>
                             <td class="action">
                                 <span class="glyphicon glyphicon-edit table-edit-icon" aria-hidden="treu"></span>
                                 <span class="glyphicon glyphicon-trash table-trash-icon" aria-hidden="treu"></span>
@@ -84,8 +80,6 @@
                 { "asSorting": [ "desc", "asc"] },
                 null,
                 null,
-                null,
-                null,
                 { "asSorting": [ ] }
             ],   //排序控制
             "iDisplayLength": 50,
@@ -101,11 +95,12 @@
             }
         });
 
-        $('input[name=search]').keyup(function(event) {
-        	var search = $('input[name=search]').val();
-        	console.log(search);
-        	$('.dataTables_filter input').val(search);
-        });
+        $('.btn-new').click(function() {
+            layer.open({
+              type: 1, 
+              content: '传入任意的文本或html' //这里content是一个普通的String
+            });
+        })
     });
 
 

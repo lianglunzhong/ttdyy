@@ -444,6 +444,7 @@ desired effect
 <!-- AdminLTE App -->
 <script src="{{ asset('ttdyy-admin/dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('ttdyy-admin/datatables/js/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('ttdyy-admin/layer/layer.js') }}"></script>
 <!-- <script src="{{ asset('ttdyy-admin/js/jquery.wresize.js') }}"></script> -->
 <script src="{{ asset('ttdyy-admin/js/ttdyy.common.js') }}"></script>
 
