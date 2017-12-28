@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div id="error-msg" class="form-group has-error hidden">
-                <div class="col-sm-12">
+                <div class="col-sm-offset-3 col-sm-9">
                     <span class="help-block">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                         <strong></strong>
@@ -123,11 +123,15 @@
         });
 
         $('.btn-new').click(function() {
+            $('#inputName').val('');
+            $('#error-msg').find('strong').html('');
+            $('#error-msg').addClass('hidden');
+
             layer.open({
                 type: 1, 
                 title: ['Add new category'],
                 content: $('#category-add-form'),
-                area: ['300px', ''],
+                area: ['350px', ''],
                 resize : false,
                 btn: ['Add', 'Cancel'],
                 yes: function(index, layero) {
