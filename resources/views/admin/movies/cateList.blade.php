@@ -68,6 +68,33 @@
 @endsection
 
 
+@section('layer')
+<div id="layer">
+    <div id="category-add-form">
+        <form class="form-horizontal" method="post" action="{{ route('category.add') }}">
+            {{ csrf_field() }}
+
+            <div class="form-group">
+                <label for="inputName" class="col-sm-3 control-label">Name:</label>
+                <div class="col-sm-9">
+                    <input id="inputName" type="text" name="name" required class="form-control">
+                </div>
+            </div>
+            <div id="error-msg" class="form-group has-error hidden">
+                <div class="col-sm-12">
+                    <span class="help-block">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <strong></strong>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+</div>
+@endsection
+
+
 @section('script')
 <script type="text/javascript">
     $(function() {
@@ -97,8 +124,55 @@
 
         $('.btn-new').click(function() {
             layer.open({
-              type: 1, 
-              content: '传入任意的文本或html' //这里content是一个普通的String
+                type: 1, 
+                title: ['Add new category'],
+                content: $('#category-add-form'),
+                area: ['300px', ''],
+                resize : false,
+                btn: ['Add', 'Cancel'],
+                yes: function(index, layero) {
+                    var name = $('#inputName').val();
+
+                    //分类名称验证
+                    if(name.length == 0 || name.length < 2 || name.length > 32) {
+                        $('#error-msg').find('strong').html('分类名称长度为2到32');
+                        $('#error-msg').removeClass('hidden');
+                        return false;
+                    } else {
+                        var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+                        if(pattern.test(name)) {
+                            $('#error-msg').find('strong').html('分类名称非法');
+                            $('#error-msg').removeClass('hidden');
+                            return false;
+                        } else {
+                            $('#error-msg').find('strong').html('');
+                            $('#error-msg').addClass('hidden');
+                        }
+                    }
+
+                    //提交数据
+                    $.ajax({
+                        method: 'post',
+                        url: "{{ route('category.add') }}",
+                        dataType: 'json',
+                        cache: false,
+                        data: {name:name, _token:'{{ csrf_token() }}'},
+                        success: function() {
+                            console.log('success');
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(xhr);
+                            console.log(status);
+                            console.log(error);
+                            layer.msg('网络错误,请稍后重试', {icon: 5});
+                        }
+                    })
+                    
+                    
+                },
+                btn2: function(index, layero) {
+                    layer.close(index);
+                }
             });
         })
     });
