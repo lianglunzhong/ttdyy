@@ -295,8 +295,11 @@ desired effect
             <li class="{{ stripos(url()->current(), '/movie/movies') ? 'active' : '' }}">
               <a href="{{ route('admin.list') }}"><i class="fa fa-file-movie-o"></i>movies</a>
             </li>
-            <li class="{{ stripos(url()->current(), '/auth/category') ? 'active' : '' }}">
+            <li class="{{ stripos(url()->current(), '/movie/category') ? 'active' : '' }}">
               <a href="{{ route('category.list') }}"><i class="fa fa-reorder"></i>category</a>
+            </li>
+            <li class="{{ stripos(url()->current(), '/movie/country') ? 'active' : '' }}">
+              <a href="{{ route('country.list') }}"><i class="fa fa-map-signs"></i>country</a>
             </li>
           </ul>
         </li>

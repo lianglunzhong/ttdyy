@@ -19,4 +19,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
     $router->get('/movie/category/list', 'CategoryController@categoryList')->name('category.list');
     $router->post('/movie/category/store', 'CategoryController@store')->name('category.store');
 
+    //movie country
+    $router->get('/movie/country/list', 'CountryController@countryList')->name('country.list');
+    $router->post('/movie/country/store', 'CountryController@store')->name('country.store');
+
 });

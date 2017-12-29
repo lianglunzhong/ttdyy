@@ -5,22 +5,22 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\CommonController;
-use App\Model\Category;
+use App\Model\Country;
 use Illuminate\Support\Facades\Validator;
 
-class CategoryController extends CommonController
+class CountryController extends CommonController
 {
     /**
-     * 分类列表
+     * 国家列表
      */
-    public function categoryList(Request $request, Category $category)
+    public function countryList(Request $request, Country $country)
     {
-        $categorys = $category->all();
+        $countries = $country->all();
 
-        return view('admin.movies.cateList')
-                ->with('page_header', 'Categories')
+        return view('admin.movies.countryList')
+                ->with('page_header', 'Countries')
                 ->with('page_header_desc', 'list')
-                ->with('categorys', $categorys);
+                ->with('countries', $countries);
     }
 
     /**
@@ -37,12 +37,10 @@ class CategoryController extends CommonController
         }
 
 
-        $category = new Category;
-        $category->name = $request->get('name');
-        if($category->save()) {
-            return response()->json(['status' => 1, 'msg' => 'Add category success!']);
+        if(Country::create(['name' => $request->get('name')])) {
+            return response()->json(['status' => 1, 'msg' => 'Add country success!']);
         } else {
-            return response()->json(['status' => 0, 'msg' => 'Add category failed!']);
+            return response()->json(['status' => 0, 'msg' => 'Add country failed!']);
         }
     }
 }
