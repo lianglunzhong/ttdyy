@@ -8,32 +8,6 @@
 <div class="row">
     <div class="col-md-12">
         <div class="content-box">
-            <!-- <div class="content-box-header">
-                <div class="row no-margin">
-                    <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="input-group">
-                            <input type="text" name="search" class="form-control" placeholder="serach...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button">
-                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-8 col-lg-9">
-                        <div class="pull-right">
-                            <button class="btn btn-success">
-                                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-                                New
-                            </button>
-                            <button class="btn btn-info">
-                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-                                Export
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <div class="content-box-body">
                 <table id="table" class="table table-bordered table-hover table-responsive">
                     <thead>
@@ -71,7 +45,7 @@
 @section('layer')
 <div id="layer">
     <div id="category-add-form">
-        <form class="form-horizontal" method="post" action="{{ route('category.add') }}">
+        <form class="form-horizontal" method="post" action="{{ route('category.store') }}">
             {{ csrf_field() }}
 
             <div class="form-group">
@@ -124,6 +98,7 @@
 
         $('.btn-new').click(function() {
             $('#inputName').val('');
+            $('#inputName').attr('autofocus', 'true');
             $('#error-msg').find('strong').html('');
             $('#error-msg').addClass('hidden');
 
@@ -157,18 +132,24 @@
                     //提交数据
                     $.ajax({
                         method: 'post',
-                        url: "{{ route('category.add') }}",
+                        url: "{{ route('category.store') }}",
                         dataType: 'json',
                         cache: false,
                         data: {name:name, _token:'{{ csrf_token() }}'},
-                        success: function() {
-                            console.log('success');
+                        success: function(data) {
+                            if(data.status) {
+                                window.location.reload();
+                            } else {
+                                $('#error-msg').find('strong').html(data.msg);
+                                $('#error-msg').removeClass('hidden');
+                                return false;
+                            }
                         },
                         error: function(xhr, status, error) {
                             console.log(xhr);
                             console.log(status);
                             console.log(error);
-                            layer.msg('网络错误,请稍后重试', {icon: 5});
+                            layer.msg('服务器网络错误！', {icon: 5});
                         }
                     })
                     

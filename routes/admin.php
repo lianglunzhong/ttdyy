@@ -17,7 +17,6 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
 
     //movie category
     $router->get('/movie/category/list', 'CategoryController@categoryList')->name('category.list');
-    $router->get('/movie/category/add', 'CategoryController@showAddForm')->name('category.add');
-    $router->post('/movie/category/add', 'CategoryController@Add');
+    $router->post('/movie/category/store', 'CategoryController@store')->name('category.store');
 
 });

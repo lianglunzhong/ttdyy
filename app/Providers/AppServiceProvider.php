@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
+use App\Validations\Validation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //启动自定义的验证规则
+        Validator::resolver(function($translator, $data, $rules, $messages)
+        {
+            return new Validation($translator, $data, $rules, $messages);
+        });
     }
 
     /**

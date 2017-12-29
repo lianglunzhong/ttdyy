@@ -87,6 +87,8 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
+    'mobile'               => 'Please enter a valid cell phone number!',
+    'except_character'               => 'The :attribute format is invalid.',
 
     /*
     |--------------------------------------------------------------------------
