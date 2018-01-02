@@ -25,6 +25,9 @@ class CreateMoviesTable extends Migration
             $table->string('lang')->nullable()->comment('语言');
             $table->string('director')->nullable()->comment('导演');
             $table->string('players')->nullable()->comment('主演');
+            $table->boolean('visible')->default(1);
+            // $table->enum('status', ['new', 'unread', 'read']);
+            $table->longText('description')->nullable()->comment('剧情简介');
             $table->timestamps();
 
             $table->foreign('country_id')->references('id')->on('countries');

@@ -2208,14 +2208,13 @@
 	function _fnVisbleColumns( oSettings )
 	{
 		var vis = 0;
-	
 		// No reduce in IE8, use a loop for now
 		$.each( oSettings.aoColumns, function ( i, col ) {
 			if ( col.bVisible && $(col.nTh).css('display') !== 'none' ) {
 				vis++;
 			}
 		} );
-	
+
 		return vis;
 	}
 	
@@ -4820,7 +4819,6 @@
 	 */
 	function _fnFeatureHtmlLength ( settings )
 	{
-		console.log(settings)
 		var
 			classes  = settings.oClasses,
 			tableId  = settings.sTableId,
@@ -6049,7 +6047,7 @@
 	
 	
 	function _fnSortAria ( settings )
-	{
+	{	
 		var label;
 		var nextSort;
 		var columns = settings.aoColumns;

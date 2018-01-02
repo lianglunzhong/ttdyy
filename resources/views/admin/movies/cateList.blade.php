@@ -15,6 +15,7 @@
                             <th class="select-all">Select all</th>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Visible</th>
                             <th>Create at</th>
                             <th class="action">Action</th>
                         </tr>
@@ -25,6 +26,7 @@
                             <td class="select-all"><input type="checkbox" name=""></td>
                             <td>{{ $category->id }}</td>
                             <td>{{ $category->name }}</td>
+                            <td>{{ $category->visible ? 'visible' : 'invisible' }}</td>
                             <td>{{ $category->created_at }}</td>
                             <td class="action">
                                 <span class="glyphicon glyphicon-edit table-edit-icon" aria-hidden="treu"></span>

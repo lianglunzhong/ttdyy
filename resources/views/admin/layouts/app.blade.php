@@ -292,8 +292,8 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu {{ stripos(url()->current(), '/admin/movie') ? 'show' : '' }}">
-            <li class="{{ stripos(url()->current(), '/movie/movies') ? 'active' : '' }}">
-              <a href="{{ route('admin.list') }}"><i class="fa fa-file-movie-o"></i>movies</a>
+            <li class="{{ stripos(url()->current(), '/movie/movie') ? 'active' : '' }}">
+              <a href="{{ route('movie.list') }}"><i class="fa fa-file-movie-o"></i>movies</a>
             </li>
             <li class="{{ stripos(url()->current(), '/movie/category') ? 'active' : '' }}">
               <a href="{{ route('category.list') }}"><i class="fa fa-reorder"></i>category</a>
