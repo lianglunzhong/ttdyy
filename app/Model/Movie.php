@@ -15,6 +15,11 @@ class Movie extends Model
 
     public function categories()
     {
-    	return $this->belongsMany('App\Model\Category');
+    	return $this->belongsToMany('App\Model\Category', 'movie_category');
+    }
+
+    public function images()
+    {
+    	return $this->hasMany('App\Model\MovieImage');
     }
 }

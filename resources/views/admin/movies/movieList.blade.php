@@ -15,7 +15,6 @@
                             <th class="select-all">Select all</th>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Alias</th>
                             <th>Director</th>
                             <th>Players</th>
                             <th>Country</th>
@@ -28,7 +27,30 @@
                             <th class="action">Action</th>
                         </tr>
                     </thead>
-                    </table>
+                    <tbody>
+                        @foreach ($movies as $movie)
+                            <tr>
+                                <td class="select-all"><input type="checkbox" name=""></td>
+                                <td>{{ $movie->id }}</td>
+                                <td>{{ $movie->name }}</td>
+                                <td>{{ $movie->director }}</td>
+                                <td>{{ $movie->players }}</td>
+                                <td>{{ $movie->country }}</td>
+                                <td>{{ $movie->lang }}</td>
+                                <td>{{ $movie->score }}</td>
+                                <td>{{ $movie->release_time }}</td>
+                                <td>{{ $movie->duration }}</td>
+                                <td>{{ $movie->visible }}</td>
+                                <td>{{ $movie->created_at }}</td>
+                                <td class="action">
+                                    <span class="glyphicon glyphicon-edit table-edit-icon" aria-hidden="treu"></span>
+                                    <span class="glyphicon glyphicon-trash table-trash-icon" aria-hidden="treu"></span>
+                                </td>
+                        </tr>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
             <div class="content-box-footer"></div>
         </div>
