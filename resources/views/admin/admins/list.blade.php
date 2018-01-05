@@ -100,12 +100,6 @@
                 "sLengthSelect": "form-control table-length"
             }
         });
-
-        $('input[name=search]').keyup(function(event) {
-        	var search = $('input[name=search]').val();
-        	console.log(search);
-        	$('.dataTables_filter input').val(search);
-        });
     });
 
 

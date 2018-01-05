@@ -79,7 +79,6 @@
                 null,
                 null,
                 null,
-                null,
                 { "asSorting": [ ] }
             ],   //排序控制
             "iDisplayLength": 50,
@@ -95,8 +94,19 @@
             }
         });
 
+        setNewBtnALink();
+
     });
 
 
+    /**
+     * 设置新增按钮的链接
+     */
+    function setNewBtnALink()
+    {
+        var btn_new = $('.table-header .btn-new');
+        var a_link = '<a href="/admin/movie/movie/create"></a>';
+        btn_new.wrap(a_link);
+    }
 </script>
 @endsection

@@ -19,7 +19,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
     {
         //movie
         $router->get('/movie/list', 'MovieController@moviesList')->name('movie.list');
-        $router->get('/movie/add', 'MovieController@showAddForm')->name('movie.add');
+        $router->get('/movie/create', 'MovieController@showCreateForm')->name('movie.create');
         $router->post('/movie/store', 'MovieController@store')->name('movie.store');
         $router->get('/movie/edit', 'MovieController@addAdminsData');
 

@@ -24,7 +24,7 @@ class MovieController extends CommonController
 
         return view('admin.movies.movieList')
                 ->with('page_header', 'Movie')
-                ->with('page_header_desc', 'list')
+                ->with('page_header_desc', 'List')
                 ->with('movies', $movies);
     }
 
@@ -32,13 +32,13 @@ class MovieController extends CommonController
     /**
      * 电影新增页面
      */
-    public function showAddForm(Request $request)
+    public function showCreateForm(Request $request)
     {
         $categories = Category::where('visible', 1)->get();
         $countries = Country::all();
-        return view('admin.movies.movieAdd')
+        return view('admin.movies.movieCreate')
                 ->with('page_header', 'Movie')
-                ->with('page_header_desc', 'add')
+                ->with('page_header_desc', 'Create')
                 ->with('categories', $categories)
                 ->with('countries', $countries);
     }

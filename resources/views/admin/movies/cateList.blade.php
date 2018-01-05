@@ -83,13 +83,14 @@
                 { "asSorting": [ "desc", "asc"] },
                 null,
                 null,
+                null,
                 { "asSorting": [ ] }
             ],   //排序控制
             "iDisplayLength": 50,
             "oLanguage": {
                 "oPaginate": {
                     "sPrevious": '<span aria-hidden="true">«</span>',
-                    "sNext": '<span aria-hidden="true">»</span>',
+                    "sNext": '<span aria-hidden="true">»</span>'
                 },
                 // "sLengthMenu": "Show _MENU_ ",
             },

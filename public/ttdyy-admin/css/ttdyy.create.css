@@ -1,0 +1,24 @@
+.content-box {
+    border-top-color: #00c0ef;
+}
+.content-box-header {
+	padding-left: 10px;
+	padding-right: 10px;
+	overflow: hidden;
+}
+.box-header-title {
+	display: inline-block;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1;
+    padding-top: 5px;
+}
+.btn-back {
+	margin-right: 8px;
+}
+.panel-create {
+	border: none;
+	border-top: solid 1px #ddd;
+	border-bottom: solid 1px #ddd;
+	border-radius: 0;
+}
