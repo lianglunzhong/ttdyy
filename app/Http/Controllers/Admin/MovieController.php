@@ -34,7 +34,7 @@ class MovieController extends CommonController
      */
     public function showCreateForm(Request $request)
     {
-        $categories = Category::where('visible', 1)->get();
+        $categories = Category::all();
         $countries = Country::all();
         return view('admin.movies.movieCreate')
                 ->with('page_header', 'Movie')

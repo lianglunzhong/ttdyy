@@ -78,15 +78,10 @@
                                 <label class="col-sm-2 control-label">Category</label>
                                 <div class="col-sm-8">
                                     <select id="category-select" class="selectpicker show-tick form-control" name="category" multiple multiple data-live-search="true">
-                                        <option>cow</option>
-                                        <option>bull</option>
-                                        <option>ox</option>
-                                        <option>ASD</option>
-                                        <option>Bla</option>
-                                        <option>Blde</option>
-                                        <option>Blfe</option>
-                                        <option>Blse</option>
-                                        <option>Blae</option>
+                                        <option></option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
