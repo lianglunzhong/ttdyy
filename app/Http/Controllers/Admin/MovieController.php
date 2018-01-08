@@ -9,6 +9,7 @@ use App\Model\Movie;
 use App\Model\Category;
 use App\Model\Country;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class MovieController extends CommonController
 {
@@ -41,5 +42,16 @@ class MovieController extends CommonController
                 ->with('page_header_desc', 'Create')
                 ->with('categories', $categories)
                 ->with('countries', $countries);
+    }
+
+    /**
+     * 电影新增保存
+     */
+    public function store(Request $request)
+    {
+        $path = $request->images->store('public');
+        Log::info('lianglunzhong');
+        Log::info(json_encode($path));
+        return response()->json($data);
     }
 }
