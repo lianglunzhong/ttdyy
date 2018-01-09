@@ -23,6 +23,9 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
         $router->post('/movie/store', 'MovieController@store')->name('movie.store');
         $router->get('/movie/edit', 'MovieController@addAdminsData');
 
+        // 电影图片ajax多图上传（新增时）
+        $router->post('/upload/images', 'MovieController@uploadImages')->name('upload.images');
+
         //movie category
         $router->get('/category/list', 'CategoryController@categoryList')->name('category.list');
         $router->post('/category/store', 'CategoryController@store')->name('category.store');

@@ -19,6 +19,7 @@ class CreateMovieImagesTable extends Migration
             $table->string('url');
             $table->boolean('default')->default(0);
             $table->boolean('visible')->default(1);
+            $table->integer('position')->unsigned();
             $table->timestamps();
             $table->foreign('movie_id')->references('id')->on('movies');
         });

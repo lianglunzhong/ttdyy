@@ -3,9 +3,6 @@
 @section('style')
     <link rel="stylesheet" type="text/css" href="{{ asset('ttdyy-admin/bootstrap-select/css/bootstrap-select.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('ttdyy-admin/css/ttdyy.create.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('ttdyy-admin/jQueryTzUpload/css/style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('ttdyy-admin/jQueryTzUpload/css/demo.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('ttdyy-admin/jQueryTzUpload/webuploader-0.1.5/webuploader.css') }}">
 @endsection
 
 
@@ -93,27 +90,16 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Images</label>
                                 <div class="col-sm-8">
-                                    <div id="uploader" class="wu-example">
-                                        <div class="queueList">
-                                            <div id="dndArea" class="placeholder">
-                                                <div id="filePicker"></div>
-                                                <p>或将照片拖到这里</p>
-                                            </div>
-                                        </div>
-                                        <div class="statusBar" style="display:none">
-                                            <div class="progress">
-                                                <span class="text">0%</span>
-                                                <span class="percentage"></span>
-                                            </div>    
-                                            <div class="info"></div>
-                                            <div class="btns">
-                                                <div id="filePicker2"></div>
-                                                <div class="uploadBtn">开始上传</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <button type="button" class="btn btn-primary images-browse">
+                                        <i class="glyphicon glyphicon-folder-open"></i>
+                                        <span>Browse</span>
+                                    </button>
                                 </div>
                             </div>
+                        </form>
+                        <form id="images-upload" class="hidden" enctype="multipart/form-data" method="post">
+                            {{ csrf_field() }}
+                            <input id="images-input" name="images" class="hidden" type="file" multiple accept="image/*">
                         </form>
                     </div>
                 </div>
@@ -127,7 +113,6 @@
 
 @section('script')
 <script type="text/javascript" src="{{ asset('ttdyy-admin/bootstrap-select/js/bootstrap-select.js') }}"></script>
-<script type="text/javascript" src="{{ asset('ttdyy-admin/jQueryTzUpload/webuploader-0.1.5/webuploader.min.js') }}"></script>
 
 <script type="text/javascript">
     $(function() {
@@ -143,28 +128,53 @@
             'size' : 8
         });
 
-        window.webuploader = {
-            config:{
-                thumbWidth: 110, //缩略图宽度，可省略，默认为110
-                thumbHeight: 110, //缩略图高度，可省略，默认为110
-                wrapId: 'uploader', //必填
-            },
-            //处理客户端新文件上传时，需要调用后台处理的地址, 必填
-            uploadUrl: 'fileupload.php',
-            //处理客户端原有文件更新时的后台处理地址，必填
-            updateUrl: 'fileupdate.php',
-            //当客户端原有文件删除时的后台处理地址，必填
-            removeUrl: 'filedel.php',
-            //初始化客户端上传文件，从后台获取文件的地址, 可选，当此参数为空时，默认已上传的文件为空
-            initUrl: 'fileinit.php',
-        }
 
-        $('.uploadBtn').click(function() {
-            console.log(1111);
-        })
+        // 添加图片按钮
+        $('.images-browse').click(function() {
+            $('#images-input').click();
+        });
+
+        // 图片选择输入框改变试卷
+        $('#images-input').change(function() {
+            console.log(111);
+            var files = $('#images-input')[0].files;
+            if(files.length > 0) {
+                var invalid = false;
+                $.each(files, function(i, file) {
+                    if(file.type.indexOf('image/') != 0) {
+                        invalid = true;
+                        return false;
+                    }
+                });
+
+                if(invalid) {
+                    $('#images-input').val('');
+                    layer.msg('只能上传图片文件', {icon: 5});
+                    return false;
+                }
+
+                var formData = new FormData($('#images-upload')[0]);
+        
+                $.ajax({
+                    method: 'POST',
+                    url: "{{ route('upload.images') }}",
+                    dataType: 'json',
+                    cache: false,
+                    data: formData,
+                    contentType: false,  
+                    processData: false, 
+                    success: function(data) {
+                        console.log(data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status);
+                        console.log(error);
+                        layer.msg('服务器网络错误！', {icon: 5});
+                    }
+                });
+            }
+        });
     });
-
-
 </script>
-<script type="text/javascript" src="{{ asset('ttdyy-admin/jQueryTzUpload/webuploader-0.1.5/extend-webuploader.js') }}"></script>
 @endsection

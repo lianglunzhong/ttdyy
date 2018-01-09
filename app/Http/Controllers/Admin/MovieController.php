@@ -54,4 +54,21 @@ class MovieController extends CommonController
         Log::info(json_encode($path));
         return response()->json($data);
     }
+
+
+    /**
+     * 新增时多图上传
+     */
+    public function uploadImages(Request $request)
+    {   
+        if(!$request->hasFile('images')) {
+            return response()->json(['status' => 0, 'msg' => '图片不存在']);
+        }
+
+        if(!$request->file('images')->isValid()) {
+            return response()->json(['status' => 0, 'msg' => $request->file('images')->getErrorMessage()]);
+        }
+        $path = $request->file('images')->store('movies', 'public');
+        return response()->json(['status' => 1, 'path' => $path, 'url' => asset('storage/'.$path)]);
+    }
 }
