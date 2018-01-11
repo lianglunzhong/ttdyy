@@ -35,5 +35,6 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
         $router->post('/country/store', 'CountryController@store')->name('country.store');
     });
     
-
+    $router->get('/test', 'CommonController@showTest');
+    $router->post('/test', 'CommonController@test')->name('admin.test');
 });

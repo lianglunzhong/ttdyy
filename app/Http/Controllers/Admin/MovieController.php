@@ -61,14 +61,32 @@ class MovieController extends CommonController
      */
     public function uploadImages(Request $request)
     {   
+        // 文件是否存在
         if(!$request->hasFile('images')) {
             return response()->json(['status' => 0, 'msg' => '图片不存在']);
         }
 
-        if(!$request->file('images')->isValid()) {
-            return response()->json(['status' => 0, 'msg' => $request->file('images')->getErrorMessage()]);
+        $pathArr = array();
+
+        // 多文件上传，循环处理
+        foreach ($request->file('images') as $file) {
+            // 文件是否有效
+            if(!$file->isValid()) {
+                return response()->json(['status' => 0, 'msg' => $file->getErrorMessage()]);
+            }
+
+            // 文件类型BMP、JPG、JPEG、PNG、GIF
+            $imageExt = array('bmp', 'jpg', 'jpeg', 'png', 'gif');
+            $ext = $file->getClientOriginalExtension();
+            if(!in_array($ext, $imageExt)) {
+                return response()->json(['status' => 0, 'msg' => '只允许上传图片']);
+            }
+
+            $path = $file->store('upload/movies/temporary', 'public');
+
+            array_push($pathArr, $path);
         }
-        $path = $request->file('images')->store('movies', 'public');
-        return response()->json(['status' => 1, 'path' => $path, 'url' => asset('storage/'.$path)]);
+        
+        return response()->json(['status' => 1, 'files' => $pathArr]);
     }
 }

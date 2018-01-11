@@ -11,6 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('jquery-ui/jquery-ui.min.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('ttdyy-admin/font-awesome/css/font-awesome.min.css') }}">
   <!-- Ionicons -->
@@ -448,6 +449,7 @@ desired effect
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('jquery-ui/jquery-ui.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('ttdyy-admin/dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('ttdyy-admin/datatables/js/jquery.dataTables.js') }}"></script>

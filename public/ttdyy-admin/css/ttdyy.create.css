@@ -25,3 +25,46 @@
 .images-browse span {
 	margin-left: 10px;
 }
+.images-preview {
+	text-align: left;
+	overflow: hidden;
+}
+.images-preview ul {
+	text-align: left;
+	overflow: hidden;
+	padding: 0px;
+}
+.images-preview ul li {
+	float: left;
+	list-style: none;
+	padding-right: 10px;
+	padding-bottom: 15px;
+}
+.images-preview img {
+	width:140px;
+	height: 140px;
+}
+.ui-state-highlight {
+	width:140px;
+	height: 140px;
+	border:dashed 1px #ccc;
+	background-color: #fff;
+}
+.images-preview {
+	display: none;
+}
+.show-remove {
+	display: none;
+	height: 30px;
+    line-height: 30px;
+    text-align: right;
+    color: white;
+  	background: rgba(0, 0, 0, 0.5);
+    padding-right: 10px;
+    z-index: 99;
+    position: absolute;
+    width: 140px;
+}
+.remove-image {
+	cursor: pointer;
+}

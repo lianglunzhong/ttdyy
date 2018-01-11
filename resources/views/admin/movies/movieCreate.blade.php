@@ -94,12 +94,16 @@
                                         <i class="glyphicon glyphicon-folder-open"></i>
                                         <span>Browse</span>
                                     </button>
+                                    <div class="images-preview">
+                                        <ul id="sortable"></ul>
+                                        <button type="button" class="btn btn-default con-to-add">继续添加</button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
                         <form id="images-upload" class="hidden" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
-                            <input id="images-input" name="images" class="hidden" type="file" multiple accept="image/*">
+                            <input id="images-input" name="images[]" class="hidden" type="file" multiple accept="image/*">
                         </form>
                     </div>
                 </div>
@@ -116,28 +120,44 @@
 
 <script type="text/javascript">
     $(function() {
-        // 分类选择
+        /**
+         * 分类选择
+         */
         $('#country-select').selectpicker({
             'size' : 8
         });
 
 
-        // 分类选择
+        /**
+         * 分类选择
+         */
         $('#category-select').selectpicker({
             'maxOptions' : 3,
             'size' : 8
         });
 
 
-        // 添加图片按钮
+        /**
+         * 添加图片按钮
+         */
         $('.images-browse').click(function() {
             $('#images-input').click();
         });
 
-        // 图片选择输入框改变试卷
+        /**
+         * 继续添加图片
+         */
+        $('.con-to-add').click(function() {
+            $('#images-input').click();
+        });
+
+        /**
+         * 图片选择输入框改变事件
+         */
         $('#images-input').change(function() {
-            console.log(111);
+            // 获取文件对象
             var files = $('#images-input')[0].files;
+
             if(files.length > 0) {
                 var invalid = false;
                 $.each(files, function(i, file) {
@@ -153,6 +173,7 @@
                     return false;
                 }
 
+                // 创建formData对象，用于提交文件信息
                 var formData = new FormData($('#images-upload')[0]);
         
                 $.ajax({
@@ -165,16 +186,60 @@
                     processData: false, 
                     success: function(data) {
                         console.log(data);
+                        if(data.status) {
+                            var host = "{{ config('app.url') }}";
+                            var template = '';
+                            $.each(data.files, function(i, file) {
+                                var src = host + '/storage/' + file;
+                                template += '<li><div class="show-remove"><span class="glyphicon glyphicon-trash remove-image"></span></div><img src="' + src + '"></li>';
+                            })
+
+                            $('#sortable').append(template);
+                            $('.images-browse').hide();
+                            $('.images-preview').show();
+
+                            initImageOperate();
+                        } else {
+                            layer.msg(data.msg, {icon: 5});
+                        }
+
+                        $('#images-input').val('');
                     },
                     error: function(xhr, status, error) {
                         console.log(xhr);
                         console.log(status);
                         console.log(error);
+                        $('#images-input').val('');
                         layer.msg('服务器网络错误！', {icon: 5});
                     }
                 });
             }
         });
+
+        $( "#sortable" ).sortable({
+            placeholder: "ui-state-highlight",
+            update: function(event, ui) {
+                console.log(111)
+            }
+        });
+        $( "#sortable" ).disableSelection();
+
+
+       initImageOperate();
+
+
     });
+
+    function initImageOperate() {
+        $('#sortable li').mouseover(function() {
+            $(this).find('.show-remove').show();
+        });
+        $('#sortable li').mouseout(function() {
+            $(this).find('.show-remove').hide();
+        });
+        $('.remove-image').click(function() {
+            $(this).closest('li').remove();
+        });
+    }
 </script>
 @endsection
