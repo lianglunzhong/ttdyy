@@ -27,6 +27,7 @@
                 <div class="panel panel-create">
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('movie.store') }}">
+                            {{ csrf_field() }}
                             <!-- Name -->
                             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                                 <label class="col-sm-2 control-label">Name</label>
@@ -55,7 +56,101 @@
                                         <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-italic"></i>
                                         </span>
-                                        <input class="form-control" type="text" name="name" value="{{ old('alias') }}">
+                                        <input class="form-control" type="text" name="alias" value="{{ old('alias') }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Director -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Director</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-education"></i>
+                                        </span>
+                                        <input class="form-control" type="text" name="director" value="{{ old('director') }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Players -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Players</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user"></i>
+                                        </span>
+                                        <input class="form-control" type="text" name="players" value="{{ old('players') }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Release time -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Release time</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-time"></i>
+                                        </span>
+                                        <input class="form-control" type="date" name="release_time" value="{{ old('release_time') }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Score -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Score</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-heart-empty"></i>
+                                        </span>
+                                        <input class="form-control" type="text" name="score" value="{{ old('score') }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Duration -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Duration</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-hourglass"></i>
+                                        </span>
+                                        <input class="form-control" type="number" name="duration" value="{{ old('duration') }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Visible -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Visible</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-eye-close"></i>
+                                        </span>
+                                        <select name="visible" class="form-control">
+                                            <option value="1">visible</option>
+                                            <option value="0">invisible</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lang -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Lang</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-volume-down"></i>
+                                        </span>
+                                        <input class="form-control" type="text" name="lang" value="{{ old('lang') }}">
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +159,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Country</label>
                                 <div class="col-sm-8">
-                                    <select id="country-select" class="selectpicker show-tick form-control" name="country" data-live-search="true">
+                                    <select id="country-select" class="selectpicker show-tick form-control" name="country_id" data-live-search="true">
                                         <option></option>
                                         @foreach ($countries as $country)
                                             <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -73,11 +168,12 @@
                                 </div>
                             </div>
 
+                            
                             <!-- Category -->
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Category</label>
                                 <div class="col-sm-8">
-                                    <select id="category-select" class="selectpicker show-tick form-control" name="category" multiple multiple data-live-search="true">
+                                    <select id="category-select" class="selectpicker show-tick form-control" name="category_ids[]" multiple multiple data-live-search="true">
                                         <option></option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -90,14 +186,32 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Images</label>
                                 <div class="col-sm-8">
+                                    <input type="text" name="imagesName" class="hidden" value="11111">
                                     <button type="button" class="btn btn-primary images-browse">
                                         <i class="glyphicon glyphicon-folder-open"></i>
                                         <span>Browse</span>
                                     </button>
                                     <div class="images-preview">
                                         <ul id="sortable"></ul>
-                                        <button type="button" class="btn btn-default con-to-add">继续添加</button>
+                                        <div class="pull-right">
+                                            <button type="button" class="btn btn-default con-to-add">继续添加</button>
+                                        </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-8">
+                                    <textarea name="description" class="form-control" rows="5">{{ old('description') }}</textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- Submit -->
+                            <div class="form-group hidden">
+                                <div class="col-sm-offset-2 col-sm-8">
+                                    <button id="create-form-submit" type="submit" class="btn">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -108,7 +222,13 @@
                     </div>
                 </div>
             </div>
-            <div class="content-box-footer"></div>
+            <div class="content-box-footer">
+                <div class="col-sm-10">
+                    <div class="pull-right">
+                        <button id="footer-submit-btn" type="button" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -185,13 +305,12 @@
                     contentType: false,  
                     processData: false, 
                     success: function(data) {
-                        console.log(data);
                         if(data.status) {
                             var host = "{{ config('app.url') }}";
                             var template = '';
                             $.each(data.files, function(i, file) {
                                 var src = host + '/storage/' + file;
-                                template += '<li><div class="show-remove"><span class="glyphicon glyphicon-trash remove-image"></span></div><img src="' + src + '"></li>';
+                                template += '<li data-img-src="' + file + '"><div class="show-remove"><span class="glyphicon glyphicon-trash remove-image"></span></div><img src="' + src + '"></li>';
                             })
 
                             $('#sortable').append(template);
@@ -199,6 +318,7 @@
                             $('.images-preview').show();
 
                             initImageOperate();
+                            setImagesName();
                         } else {
                             layer.msg(data.msg, {icon: 5});
                         }
@@ -216,10 +336,13 @@
             }
         });
 
+        /**
+         * 图片移动设置
+         */
         $( "#sortable" ).sortable({
             placeholder: "ui-state-highlight",
             update: function(event, ui) {
-                console.log(111)
+                setImagesName();
             }
         });
         $( "#sortable" ).disableSelection();
@@ -227,9 +350,17 @@
 
        initImageOperate();
 
-
+        /**
+         * 提交表单按钮
+         */
+        $('#footer-submit-btn').click(function() {
+            $('#create-form-submit').click();
+        });
     });
 
+    /**
+     * AJAX上传图片成功后初始化图片操作
+     */
     function initImageOperate() {
         $('#sortable li').mouseover(function() {
             $(this).find('.show-remove').show();
@@ -239,7 +370,31 @@
         });
         $('.remove-image').click(function() {
             $(this).closest('li').remove();
+            setImagesName();
         });
     }
+
+    /**
+     * 设置图片名称的值
+     */
+    function setImagesName() {
+        var value = '';
+
+        if($('#sortable li').length == 0) {
+            $('.images-browse').show();
+            $('.images-preview').hide();
+        } else {
+            $('#sortable li').each(function(i) {
+                var name = $(this).attr('data-img-src');
+                value += name;
+                if(i < $('#sortable li').length -1) {
+                    value += ';'
+                }
+            });
+        }
+
+        $('input[name=imagesName]').val(value);
+    }
+
 </script>
 @endsection

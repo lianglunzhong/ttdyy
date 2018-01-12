@@ -8,6 +8,8 @@ class Movie extends Model
 {
     protected $table = 'movies';
 
+    protected $fillable = ['name', 'alias', 'director', 'players', 'release_time', 'score', 'duration', 'visible', 'lang', 'country_id', 'description', 'year'];
+
     public function country()
     {
     	return $this->belongsTo('App\Model\Country');

@@ -10,6 +10,7 @@ use App\Model\Category;
 use App\Model\Country;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends CommonController
 {
@@ -49,10 +50,18 @@ class MovieController extends CommonController
      */
     public function store(Request $request)
     {
-        $path = $request->images->store('public');
-        Log::info('lianglunzhong');
-        Log::info(json_encode($path));
-        return response()->json($data);
+        $this->validate($request, [
+            'name' => 'required|unique:movies'
+        ]);
+
+        DB::beginTransaction();
+        try {
+            DB::commit();
+        } catch(\Exception $e) {
+            DB::rollBack();
+        }
+
+        dd($request->all());
     }
 
 
