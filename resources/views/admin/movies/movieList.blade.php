@@ -35,7 +35,7 @@
                                 <td>{{ $movie->name }}</td>
                                 <td>{{ $movie->director }}</td>
                                 <td>{{ $movie->players }}</td>
-                                <td>{{ $movie->country }}</td>
+                                <td>{{ $movie->country->name }}</td>
                                 <td>{{ $movie->lang }}</td>
                                 <td>{{ $movie->score }}</td>
                                 <td>{{ $movie->release_time }}</td>

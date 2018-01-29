@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 require __DIR__.'./admin.php';
+require __DIR__.'./api.php';

@@ -8,9 +8,11 @@ use App\Http\Controllers\Admin\CommonController;
 use App\Model\Movie;
 use App\Model\Category;
 use App\Model\Country;
+use App\Model\MovieImage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class MovieController extends CommonController
 {
@@ -56,12 +58,34 @@ class MovieController extends CommonController
 
         DB::beginTransaction();
         try {
+            $movie = Movie::create($request->all());
+
+            foreach ($request->get('category_ids') as $category_id) {
+                $movie->categories()->attach($category_id);
+            }
+
+            $images = $request->get('imagesName');
+            $images = explode(';', $images);
+            if(count($images > 0)) {
+                foreach ($images as $key => $image) {
+                    $pathArr = explode('/', $image);
+                    $newPath = 'upload/movies/' . $movie->id . '/' . $pathArr[3];
+                    Storage::disk('public')->move($image, $newPath);
+
+                    $movie_image = new MovieImage(['url' => $newPath, 'visible' => 1, 'position' => $key]);
+
+                    $movie->images()->save($movie_image);
+                }
+            }
+
             DB::commit();
         } catch(\Exception $e) {
+            return back()->withInput()->withError(['store_error' => 'store failed']);
+            Log::info('store movie error:' . $e);
             DB::rollBack();
         }
 
-        dd($request->all());
+        return redirect()->route('movie.list');
     }
 
 
