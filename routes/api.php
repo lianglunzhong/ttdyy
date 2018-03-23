@@ -22,4 +22,9 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function($router) {
 	$router->get('/seller', 'SellController@seller');
 	$router->get('/goods', 'SellController@goods');
 	$router->get('/ratings', 'SellController@ratings');
+
+	$router->group(['prefix' => 'lol'], function($router) {
+		$router->get('/test', 'LolController@test');
+		$router->any('/save_news', 'LolController@saveNews');
+	});
 });
